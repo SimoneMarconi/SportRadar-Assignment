@@ -1,0 +1,11 @@
+Prompts:
+1) I am going to provide to you the tables of a database written in python3 for SQLite3, I want you to create at lease 20 matches with at least 15 teams and 10 locations, the data should follow this rules:
+- integrate the following sports -> football, basketball, baseball 
+- add a quick description for every team 
+- you don't need to add descriptions to every match 
+- make sure that the sold tickets for a match are at most equal to the number of seats available for the location 
+- the scores of the matches should follow this format "score_team_1 : score_team_2" 
+- not every team has a stable location where they train so you can leave some NULL 
+
+Here is the database schema: ...
+1.1) Now create some more matches with None scores, this are matches that haven't been played yet
