@@ -1,100 +1,103 @@
+import json
 import sqlite3
 import datetime
+from typing import Optional
 
-def filterAfterTime(cursor: sqlite3.Cursor, date: datetime.date):
-    cursor.execute(
-    """
+
+def executeSQL(conn: sqlite3.Connection, query: str, params: Optional[tuple]):
+    if params:
+        cursor = conn.execute(query, params)
+    else:
+        cursor = conn.execute(query)
+    rows = cursor.fetchall()
+    columns = [description[0] for description in cursor.description]
+    results = [dict(zip(columns, row)) for row in rows]
+    return json.dumps(results)
+
+def getAll(conn: sqlite3.Connection):
+    query = """SELECT * FROM MATCH_VIEW"""
+    res = executeSQL(conn, query, None)
+    return res
+
+def filterAfterTime(conn: sqlite3.Connection, date: datetime.date):
+    query = """
     SELECT * FROM MATCH_VIEW
     WHERE datetime(date) > datetime(?);
-    """, ((date, ))
-    )
-    rows = cursor.fetchall()
-    cursor.close()
-    return rows
+    """
+    params = (date, )
+    executeSQL(conn, query, params)
+    return 
 
-def filterTeamName(cursor: sqlite3.Cursor, teamName: str):
-    cursor.execute(
-        """
-        SELECT * FROM MATCH_VIEW
-        WHERE team1 == (?) OR team2 == (?);
-        """, ((teamName, teamName))
-    )
-    rows = cursor.fetchall()
-    cursor.close()
-    return rows
+def filterTeamName(conn: sqlite3.Connection, teamName: str):
+    query = """
+    SELECT * FROM MATCH_VIEW
+    WHERE team1 == (?) OR team2 == (?);
+    """
+    params = (teamName, teamName)
+    res = executeSQL(conn, query, params)
+    return res
 
-def filterSportName(cursor: sqlite3.Cursor, sportName: str):
-    cursor.execute(
-        """
-        SELECT v.*
-        FROM MATCH AS m
-        JOIN MATCH_VIEW AS v 
-          ON m.match_id = v.match_id
-        JOIN TEAM AS t
-          ON t.team_id IN (m.team1_id, m.team2_id)
-        WHERE t.sport = (?)
-        GROUP BY(v.match_id);
-        """, (sportName, )
-    )
-    rows = cursor.fetchall()
-    cursor.close()
-    return rows
+def filterSportName(conn: sqlite3.Connection, sportName: str):
+    query = """
+    SELECT v.*
+    FROM MATCH AS m
+    JOIN MATCH_VIEW AS v 
+      ON m.match_id = v.match_id
+    JOIN TEAM AS t
+      ON t.team_id IN (m.team1_id, m.team2_id)
+    WHERE t.sport = (?)
+    GROUP BY(v.match_id);
+    """
+    params =  (sportName, )
+    res = executeSQL(conn, query, params)
+    return res
 
-def filterLocationName(cursor: sqlite3.Cursor, locationName: str):
-    cursor.execute(
-        """
-        SELECT * FROM MATCH_VIEW
-        WHERE location_name == (?);
-        """, ((locationName, ))
-    )
-    rows = cursor.fetchall()
-    cursor.close()
-    return rows
+def filterLocationName(conn: sqlite3.Connection, locationName: str):
+    query = """
+    SELECT * FROM MATCH_VIEW
+    WHERE location_name == (?);
+    """ 
+    params = (locationName, )
+    res = executeSQL(conn, query, params)
+    return res
 
-def filterMatchesWon(cursor: sqlite3.Cursor, teamName: str):
-    cursor.execute(
-        """
+def filterMatchesWon(conn: sqlite3.Connection, teamName: str):
+    query = """
         SELECT * FROM MATCH_VIEW
         WHERE (team1 = (?) AND score1 >= score2) OR (team2 = (?) AND score2 >= score1);
-        """, ((teamName, ))
-    )
-    rows = cursor.fetchall()
-    cursor.close()
-    return rows
+        """ 
+    params = (teamName, )
+    res = executeSQL(conn, query, params)
+    return res
 
-def futureNotSoldOut(cursor: sqlite3.Cursor, date: str):
-    cursor.execute(
-        """
-        SELECT v.* FROM MATCH AS m
-        JOIN MATCH_VIEW AS v
-        ON m.match_id = v.match_id
-        JOIN LOCATION AS l
-        ON m.location_id = l.location_id
-        WHERE (l.seats > m.tickets_sold) and (m.date > (?))
-        """, ((date, ))
-    )
-    rows = cursor.fetchall()
-    cursor.close()
-    return rows
+def futureNotSoldOut(conn: sqlite3.Connection, date: str):
+    query = """
+    SELECT v.* FROM MATCH AS m
+    JOIN MATCH_VIEW AS v
+    ON m.match_id = v.match_id
+    JOIN LOCATION AS l
+    ON m.location_id = l.location_id
+    WHERE (l.seats > m.tickets_sold) and (m.date > (?))
+    """ 
+    params = (date, )
+    res = executeSQL(conn, query, params) 
+    return res
 
-def soldOutMatches(cursor: sqlite3.Cursor):
-    cursor.execute(
-        """
-        SELECT v.* FROM MATCH AS m
-        JOIN MATCH_VIEW AS v
-        ON m.match_id = v.match_id
-        JOIN LOCATION AS l
-        ON m.location_id = l.location_id
-        WHERE (l.seats = m.tickets_sold)
-        """
-    )
-    rows = cursor.fetchall()
-    cursor.close()
-    return rows
+def soldOutMatches(conn: sqlite3.Connection, date: str):
+    query = """
+    SELECT v.* FROM MATCH AS m
+    JOIN MATCH_VIEW AS v
+    ON m.match_id = v.match_id
+    JOIN LOCATION AS l
+    ON m.location_id = l.location_id
+    WHERE (l.seats = m.tickets_sold) and (m.date > (?))
+    """
+    params = (date, )
+    res = executeSQL(conn, query, params)
+    return res
 
-def getLeaderBoard(cursor: sqlite3.Cursor, sportName: str):
-
-    cursor.execute("""
+def getLeaderBoard(conn: sqlite3.Connection, sportName: str):
+    query = """
     SELECT t.name AS team_name, COUNT(*) AS wins
     FROM TEAM t
     JOIN MATCH m
@@ -103,7 +106,7 @@ def getLeaderBoard(cursor: sqlite3.Cursor, sportName: str):
     WHERE t.sport = (?)
     GROUP BY t.team_id
     ORDER BY wins DESC;
-    """, (sportName, ))
-    rows = cursor.fetchall()
-    cursor.close()
-    return rows
+    """ 
+    params = (sportName, )
+    res = executeSQL(conn, query, params)
+    return res

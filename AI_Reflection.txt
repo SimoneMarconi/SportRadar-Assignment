@@ -9,3 +9,5 @@ Prompts:
 
 Here is the database schema: ...
 1.1) Now create some more matches with None scores, this are matches that haven't been played yet
+
+2) What is the best way to handle a sqlite3 connection context in flask using Python
