@@ -1,2 +1,3 @@
 backend/.venv/*
 backend/sports.db
+backend/__pycache__/*
