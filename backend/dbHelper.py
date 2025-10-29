@@ -64,7 +64,7 @@ def filterLocationName(conn: sqlite3.Connection, locationName: str):
 def filterMatchesWon(conn: sqlite3.Connection, teamName: str):
     query = """
         SELECT * FROM MATCH_VIEW
-        WHERE (team1 = (?) AND score1 >= score2) OR (team2 = (?) AND score2 >= score1);
+        WHERE ((team1 = (?) AND score1 >= score2) OR (team2 = (?) AND score2 >= score1)) AND live = false;
         """ 
     params = (teamName, )
     res = executeSQL(conn, query, params)
@@ -77,7 +77,7 @@ def futureNotSoldOut(conn: sqlite3.Connection, date: str):
     ON m.match_id = v.match_id
     JOIN LOCATION AS l
     ON m.location_id = l.location_id
-    WHERE (l.seats > m.tickets_sold) and (m.date > (?))
+    WHERE (l.seats > m.tickets_sold) AND (m.date > (?)) AND m.live = false
     """ 
     params = (date, )
     res = executeSQL(conn, query, params) 
@@ -101,8 +101,8 @@ def getLeaderBoard(conn: sqlite3.Connection, sportName: str):
     SELECT t.name AS team_name, COUNT(*) AS wins
     FROM TEAM t
     JOIN MATCH m
-        ON (t.team_id = m.team1_id AND m.score_team1 >= m.score_team2)
-        OR (t.team_id = m.team2_id AND m.score_team2 >= m.score_team1)
+        ON (t.team_id = m.team1_id AND m.score_team1 >= m.score_team2 AND m.live = false)
+        OR (t.team_id = m.team2_id AND m.score_team2 >= m.score_team1 AND m.live = false)
     WHERE t.sport = (?)
     GROUP BY t.team_id
     ORDER BY wins DESC;
