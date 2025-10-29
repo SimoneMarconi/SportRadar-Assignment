@@ -110,3 +110,54 @@ def getLeaderBoard(conn: sqlite3.Connection, sportName: str):
     params = (sportName, )
     res = executeSQL(conn, query, params)
     return res
+
+def getLiveMatches(conn: sqlite3.Connection, sport: Optional[str]):
+    res = None
+    if sport:
+        query = """
+        SELECT * FROM MATCH_VIEW
+        WHERE live = true AND sport = (?)
+        """ 
+        params = (sport, )
+        res = executeSQL(conn, query, params)
+    else:
+        query = """
+        SELECT * FROM MATCH_VIEW
+        WHERE live = true
+        """ 
+        res = executeSQL(conn, query, None)
+    return res
+
+def getUpcomingMatches(conn: sqlite3.Connection, sport: Optional[str], date: str):
+    res = None
+    if sport:
+        query = """
+        SELECT * FROM MATCH_VIEW
+        WHERE date > (?) AND sport = (?)
+        """ 
+        params = (date, sport)
+        res = executeSQL(conn, query, params)
+    else:
+        query = """
+        SELECT * FROM MATCH_VIEW
+        WHERE date > (?)
+        """ 
+        res = executeSQL(conn, query, None)
+    return res
+
+def getFinishedMatches(conn: sqlite3.Connection, sport: Optional[str], date: str):
+    res = None
+    if sport:
+        query = """
+        SELECT * FROM MATCH_VIEW
+        WHERE date < (?) AND sport = (?)
+        """ 
+        params = (date, sport)
+        res = executeSQL(conn, query, params)
+    else:
+        query = """
+        SELECT * FROM MATCH_VIEW
+        WHERE date < (?)
+        """ 
+        res = executeSQL(conn, query, None)
+    return res

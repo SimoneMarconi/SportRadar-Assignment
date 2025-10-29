@@ -112,3 +112,46 @@ def getLeaderboard():
     conn = getDb()
     res = getLeaderBoard(conn, sport)
     return res
+
+
+@app.route("/live_matches", methods=["POST"])
+def getLive():
+    data = request.json
+    sport = data.get("sport")
+    if sport:
+        conn = getDb()
+        res = getLiveMatches(conn, sport)
+    else:
+        conn = getDb()
+        res = getLiveMatches(conn, None)
+    return res
+
+@app.route("/upcoming_matches", methods=["POST"])
+def getUpcoming():
+    data = request.json
+    sport = data.get("sport")
+    date = data.get("date")
+    if not date:
+        return jsonify({"message": "missing date"}), 400
+    if sport:
+        conn = getDb()
+        res = getUpcomingMatches(conn, sport, date)
+    else:
+        conn = getDb()
+        res = getUpcomingMatches(conn, None, date)
+    return res
+
+@app.route("/finished_matches", methods=["POST"])
+def getFinished():
+    data = request.json
+    sport = data.get("sport")
+    date = data.get("date")
+    if not date:
+        return jsonify({"message": "missing date"}), 400
+    if sport:
+        conn = getDb()
+        res = getFinishedMatches(conn, sport, date)
+    else:
+        conn = getDb()
+        res = getFinishedMatches(conn, None, date)
+    return res
