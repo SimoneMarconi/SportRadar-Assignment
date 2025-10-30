@@ -44,20 +44,20 @@ matches = [
     ("2025-05-10", "19:00", 4, 11, 4, None, 30000, 3, 1, False),
     ("2025-06-22", "18:30", 1, 13, 10, None, 27000, 2, 2, False),
     ("2025-09-05", "18:00", 1, 3, 1, "Preseason friendly match.", 50000, 3, 2, False),
-    ("2025-09-12", "20:00", 2, 11, 4, None, 35000, 1, 1, False),
+    ("2025-11-12", "20:00", 2, 11, 4, None, 35000, None, None, False),
     ("2025-09-20", "19:30", 4, 13, 6, None, 20000, 1, 1, False),
     ("2025-10-20", "19:30", 4, 13, 6, None, 20000, 0, 0, True),
     ("2025-10-20", "18:30", 1, 2, 1, None, 20000, 1, 0, True),
 
     # Basketball
     ("2025-01-20", "19:30", 5, 6, 5, "Opening basketball night.", 16000, 3, 2, False),
-    ("2025-02-12", "18:00", 7, 12, 2, None, 14000, 1, 1, False),
+    ("2025-02-12", "18:00", 7, 12, 2, None, 14000, 1, 3, False),
     ("2025-03-10", "20:00", 6, 15, 7, "A close and intense game.", 21000, 2, 2, False),
     ("2025-04-05", "19:45", 15, 5, 7, None, 20000, 2, 2, False),
     ("2025-05-14", "18:30", 12, 7, 2, None, 12000, 1, 1, False),
     ("2025-06-01", "20:15", 15, 6, 7, None, 21000, 2, 2, False),
     ("2025-09-25", "18:45", 5, 15, 5, "exhibition match.", 14000, 3, 2, False),
-    ("2025-10-02", "20:15", 6, 12, 2, None, 15000, 1, 1, False),
+    ("2025-12-02", "20:15", 6, 12, 2, None, 15000, None, None, False),
     ("2025-10-20", "19:00", 7, 15, 7, None, 18000, 3, 2, True),
 
     # Baseball
@@ -68,7 +68,7 @@ matches = [
     ("2025-05-20", "15:45", 14, 8, 8, None, 33000, 2, 4, False),
     ("2025-06-30", "16:15", 10, 9, 9, "Friendly preseason match.", 15000, 1, 3, False),
     ("2025-10-15", "16:00", 8, 14, 8, None, 31000, 5, 3, False),
-    ("2025-10-30", "17:00", 14, 8, 8, "Upcoming league match.", 32000, 2, 5, False),
+    ("2025-12-30", "17:00", 14, 8, 8, "Upcoming league match.", 32000, None, None, False),
     ("2025-10-20", "19:30", 9, 10, 9, None, 15000, 4, 2, True),
 ]
 
@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS MATCH (
 cursor.execute(
     """
     CREATE VIEW IF NOT EXISTS MATCH_VIEW AS
-    SELECT m.match_id AS match_id, m.date AS date, m.time AS time, t1.name AS team1, t2.name AS team2, m.score_team1 AS score1, m.score_team2 AS score2, l.name AS location_name, m.description AS description, m.tickets_sold AS tickets_sold, m.live AS live
+    SELECT m.match_id AS match_id, m.date AS date, m.time AS time, t1.name AS team1, t2.name AS team2, m.score_team1 AS score1, m.score_team2 AS score2, l.name AS location_name, m.description AS description, m.tickets_sold AS tickets_sold, m.live AS live, t1.sport AS sport
     FROM MATCH as m
     JOIN TEAM AS t1 ON m.team1_id == t1.team_id
     JOIN TEAM AS t2 ON m.team2_id == t2.team_id

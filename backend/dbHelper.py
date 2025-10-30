@@ -161,3 +161,17 @@ def getFinishedMatches(conn: sqlite3.Connection, sport: Optional[str], date: str
         """ 
         res = executeSQL(conn, query, None)
     return res
+
+def getMatch(conn: sqlite3.Connection, match_id: int):
+    res = None
+    query = """
+    SELECT t1.name AS team1, t2.name AS team2, t1.description AS team1_description, t2.description AS team2_description, m.description AS match_description, l.coordinates AS coordinates, m.tickets_sold AS tickets_sold, l.seats AS total_seats
+    FROM MATCH as m
+    JOIN TEAM AS t1 ON m.team1_id == t1.team_id
+    JOIN TEAM AS t2 ON m.team2_id == t2.team_id
+    JOIN LOCATION AS l on m.location_id == l.location_id
+    WHERE match_id = (?)
+    """ 
+    params = (match_id, )
+    res = executeSQL(conn, query, params)
+    return res

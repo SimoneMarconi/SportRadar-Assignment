@@ -1,0 +1,144 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: slideUp 700ms ease;
+    cursor: pointer;
+}
+
+.overlay-container {
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)) padding-box,
+        linear-gradient(135deg, rgba(96, 165, 250, 0.45), rgba(45, 212, 191, 0.35)) border-box;
+    border: 1px solid transparent;
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow-lg);
+    padding: 24px 28px;
+    width: min(600px, 90vw);
+    color: var(--text);
+    cursor: default;
+    animation: slideUp 200ms ease;
+}
+
+.overlay-container.loading {
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.overlay-container p {
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.game-description,
+.team1-description,
+.team2-description {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    line-height: 1.5;
+}
+
+.game-description {
+    box-shadow: 0 0 14px rgba(96, 165, 250, 0.15);
+}
+
+.team1-description p,
+.team2-description p {
+    color: var(--accent-2);
+}
+
+.team1-description {
+    border-left: 3px solid var(--accent);
+}
+
+.team2-description {
+    border-left: 3px solid var(--accent-2);
+}
+
+.location-description {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 16px;
+}
+
+.tickets-sold {
+    position: absolute;
+    left: 10px;
+    display: flex;
+    gap: 5px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.total-seats {
+    position: absolute;
+    right: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.final-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 30px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(12px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

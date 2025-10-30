@@ -10,6 +10,7 @@
         linear-gradient(135deg, rgba(96,165,250,0.45), rgba(45,212,191,0.35)) border-box;
     box-shadow: var(--shadow-lg);
     transition: transform 200ms ease, box-shadow 200ms ease;
+    cursor: pointer;
 }
 
 .card-container:hover {

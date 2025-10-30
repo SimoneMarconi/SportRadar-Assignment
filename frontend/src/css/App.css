@@ -1,0 +1,22 @@
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    align-items: stretch;
+    width: min(1100px, 92vw);
+    margin: 0 auto 24px auto;
+}
+
+.loading-container {
+    height: 80%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.loading-skeleton {
+    height: 100%;
+    width: 80%;
+    border-radius: 20px;
+    background-color: rgba(96, 165, 250, 0.15);
+}
