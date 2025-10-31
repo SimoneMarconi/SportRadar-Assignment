@@ -14,13 +14,6 @@ function LeaderBoard() {
     useEffect(() => {
         setLoading(true)
         fetch('http://localhost:5000/leaderboard', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                sport: `${sportFilter.toString()}`
-            })
         })
             .then(response => response.json())
             .then(data => {
@@ -30,7 +23,28 @@ function LeaderBoard() {
             .catch(error => {
                 console.error('Request error:', error);
             });
-    }, [sportFilter])
+    }, [])
+
+    // useEffect(() => {
+    //     setLoading(true)
+    //     fetch('http://localhost:5000/leaderboard', {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify({
+    //             sport: `${sportFilter.toString()}`
+    //         })
+    //     })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             setCards(data)
+    //             setLoading(false)
+    //         })
+    //         .catch(error => {
+    //             console.error('Request error:', error);
+    //         });
+    // }, [sportFilter])
 
     if (loading) {
         return (
@@ -45,7 +59,7 @@ function LeaderBoard() {
         return <div>
             <SportFilter sportFilter={sportFilter} setSportFilter={setSportFilter} />
             <div className="board-container">
-                {cards.map(card => <LeaderBoardCard team_name={card.team_name} location_name={card.location_name} wins={card.wins} key={card.team_name} />)}
+                {cards.filter(card => card.sport == sportFilter.toString()).map(card => <LeaderBoardCard team_name={card.team_name} location_name={card.location_name} wins={card.wins} sport={card.sport} key={card.team_name} />)}
             </div>
         </div>
     }

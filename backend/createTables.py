@@ -89,9 +89,9 @@ CREATE TABLE IF NOT EXISTS TEAM (
     team_id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
     sport TEXT NOT NULL,
-    location_id INTEGER,
+    _location_id INTEGER,
     description TEXT,
-    FOREIGN KEY (location_id) REFERENCES LOCATION(location_id)
+    FOREIGN KEY (_location_id) REFERENCES LOCATION(location_id)
 );
 """)
 
@@ -101,55 +101,20 @@ CREATE TABLE IF NOT EXISTS MATCH (
     match_id INTEGER PRIMARY KEY,
     date TEXT NOT NULL,
     time TEXT NOT NULL,
-    team1_id INTEGER,
-    team2_id INTEGER,
+    _team1_id INTEGER,
+    _team2_id INTEGER,
     score_team1 INTEGER,
     score_team2 INTEGER,
-    location_id INTEGER,
+    _location_id INTEGER,
     description TEXT,
     tickets_sold INT,
     live BOOLEAN,
-    FOREIGN KEY (team1_id) REFERENCES TEAM(team_id),
-    FOREIGN KEY (team2_id) REFERENCES TEAM(team_id),
-    FOREIGN KEY (location_id) REFERENCES LOCATION(location_id)
-    CHECK(team1_id <> team2_id)
+    FOREIGN KEY (_team1_id) REFERENCES TEAM(team_id),
+    FOREIGN KEY (_team2_id) REFERENCES TEAM(team_id),
+    FOREIGN KEY (_location_id) REFERENCES LOCATION(location_id)
+    CHECK(_team1_id <> _team2_id)
 );
 """)
-
-# SCORE
-# cursor.execute("""
-# CREATE TABLE IF NOT EXISTS SCORE(
-#     match_id INTEGER,
-#     team_id INTEGER,
-#     scored INTEGER NOT NULL,
-#     points INTEGER NOT NULL,
-#     PRIMARY KEY(match_id, team_id),
-#     FOREIGN KEY(match_id) REFERENCES MATCH(match_id),
-#     FOREIGN KEY(team_id) REFERENCES TEAM(team_id)
-# );
-# """)
-
-# MATCHES VIEW
-# cursor.execute("""
-#     CREATE VIEW IF NOT EXISTS MATCH_VIEW AS
-#     SELECT m.match_id,
-#     m.date,
-#     m.time,
-#     t1.name AS team1,
-#     t2.name AS team2,
-#     s1.scored AS team1_score,
-#     s2.scored AS team2_score,
-#     m.location_id,
-#     m.description,
-#     m.tickets_sold
-#     FROM TEAM t
-#     JOIN MATCH m ON (t.team_id = m.team1_id OR t.team_id = m.team2_id)
-#     JOIN TEAM t1 ON m.team1_id = t1.team_id
-#     JOIN TEAM t2 ON m.team2_id = t2.team_id
-#     LEFT JOIN SCORE s1 ON m.match_id = s1.match_id AND s1.team_id = m.team1_id
-#     LEFT JOIN SCORE s2 ON m.match_id = s2.match_id AND s2.team_id = m.team2_id
-#     GROUP BY(m.match_id)
-# """)
 
 # MATCHES VIEW
 cursor.execute(
@@ -157,9 +122,9 @@ cursor.execute(
     CREATE VIEW IF NOT EXISTS MATCH_VIEW AS
     SELECT m.match_id AS match_id, m.date AS date, m.time AS time, t1.name AS team1, t2.name AS team2, m.score_team1 AS score1, m.score_team2 AS score2, l.name AS location_name, m.description AS description, m.tickets_sold AS tickets_sold, m.live AS live, t1.sport AS sport
     FROM MATCH as m
-    JOIN TEAM AS t1 ON m.team1_id == t1.team_id
-    JOIN TEAM AS t2 ON m.team2_id == t2.team_id
-    JOIN LOCATION AS l on m.location_id == l.location_id
+    JOIN TEAM AS t1 ON m._team1_id == t1.team_id
+    JOIN TEAM AS t2 ON m._team2_id == t2.team_id
+    JOIN LOCATION AS l on m._location_id == l.location_id
     """
 )
 
@@ -168,16 +133,12 @@ INSERT INTO LOCATION (name, seats, coordinates) VALUES (?, ?, ?)
 """, locations)
 
 cursor.executemany("""
-INSERT INTO TEAM (name, sport, location_id, description) VALUES (?, ?, ?, ?)
+INSERT INTO TEAM (name, sport, _location_id, description) VALUES (?, ?, ?, ?)
 """, teams)
 
 cursor.executemany("""
-INSERT INTO MATCH (date, time, team1_id, team2_id, location_id, description, tickets_sold, score_team1, score_team2, live) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+INSERT INTO MATCH (date, time, _team1_id, _team2_id, _location_id, description, tickets_sold, score_team1, score_team2, live) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 """, matches)
-
-# cursor.executemany("""
-# INSERT INTO SCORE(match_id, team_id, scored, points) VALUES (?, ?, ?, ?)
-# """, scores)
 
 connection.commit()
 connection.close()

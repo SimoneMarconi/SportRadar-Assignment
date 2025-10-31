@@ -39,6 +39,7 @@ type LeaderBoardCardProps = {
     team_name: string
     location_name: string
     wins: number
+    sport: string
 }
 
 type MatchesProps = {

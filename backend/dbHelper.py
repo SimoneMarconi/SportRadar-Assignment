@@ -44,7 +44,7 @@ def filterSportName(conn: sqlite3.Connection, sportName: str):
     JOIN MATCH_VIEW AS v 
       ON m.match_id = v.match_id
     JOIN TEAM AS t
-      ON t.team_id IN (m.team1_id, m.team2_id)
+      ON t.team_id IN (m._team1_id, m._team2_id)
     WHERE t.sport = (?)
     GROUP BY(v.match_id);
     """
@@ -76,7 +76,7 @@ def futureNotSoldOut(conn: sqlite3.Connection, date: str):
     JOIN MATCH_VIEW AS v
     ON m.match_id = v.match_id
     JOIN LOCATION AS l
-    ON m.location_id = l.location_id
+    ON m._location_id = l.location_id
     WHERE (l.seats > m.tickets_sold) AND (m.date > (?)) AND m.live = false
     """ 
     params = (date, )
@@ -89,29 +89,44 @@ def soldOutMatches(conn: sqlite3.Connection, date: str):
     JOIN MATCH_VIEW AS v
     ON m.match_id = v.match_id
     JOIN LOCATION AS l
-    ON m.location_id = l.location_id
+    ON m._location_id = l.location_id
     WHERE (l.seats = m.tickets_sold) and (m.date > (?))
     """
     params = (date, )
     res = executeSQL(conn, query, params)
     return res
 
-def getLeaderBoard(conn: sqlite3.Connection, sportName: str):
-    query = """
-    SELECT t.name AS team_name, l.name AS location_name, COUNT(*) AS wins
-    FROM TEAM AS t
-    JOIN MATCH AS m
-        ON (t.team_id = m.team1_id AND m.score_team1 >= m.score_team2 AND m.live = false)
-        OR (t.team_id = m.team2_id AND m.score_team2 >= m.score_team1 AND m.live = false)
-    JOIN LOCATION AS l
-    ON t.location_id = l.location_id
-    WHERE t.sport = (?)
-    GROUP BY t.team_id
-    ORDER BY wins DESC;
-    """ 
-    params = (sportName, )
-    res = executeSQL(conn, query, params)
-    return res
+def getLeaderBoard(conn: sqlite3.Connection, sportName: Optional[str]):
+    if not sportName:
+        query = """
+        SELECT t.name AS team_name, l.name AS location_name, COUNT(*) AS wins, t.sport AS sport
+        FROM TEAM AS t
+        JOIN MATCH AS m
+            ON (t.team_id = m._team1_id AND m.score_team1 >= m.score_team2 AND m.live = false)
+            OR (t.team_id = m._team2_id AND m.score_team2 >= m.score_team1 AND m.live = false)
+        JOIN LOCATION AS l
+        ON t._location_id = l.location_id
+        GROUP BY t.team_id
+        ORDER BY wins DESC;
+        """ 
+        res = executeSQL(conn, query, None)
+        return res
+    else:
+        query = """
+        SELECT t.name AS team_name, l.name AS location_name, COUNT(*) AS wins
+        FROM TEAM AS t
+        JOIN MATCH AS m
+            ON (t.team_id = m._team1_id AND m.score_team1 >= m.score_team2 AND m.live = false)
+            OR (t.team_id = m._team2_id AND m.score_team2 >= m.score_team1 AND m.live = false)
+        JOIN LOCATION AS l
+        ON t._location_id = l.location_id
+        WHERE t.sport = (?)
+        GROUP BY t.team_id
+        ORDER BY wins DESC;
+        """ 
+        params = (sportName, )
+        res = executeSQL(conn, query, params)
+        return res
 
 def getLiveMatches(conn: sqlite3.Connection, sport: Optional[str]):
     res = None
@@ -169,9 +184,9 @@ def getMatch(conn: sqlite3.Connection, match_id: int):
     query = """
     SELECT t1.name AS team1, t2.name AS team2, t1.description AS team1_description, t2.description AS team2_description, m.description AS match_description, l.coordinates AS coordinates, m.tickets_sold AS tickets_sold, l.seats AS total_seats
     FROM MATCH as m
-    JOIN TEAM AS t1 ON m.team1_id == t1.team_id
-    JOIN TEAM AS t2 ON m.team2_id == t2.team_id
-    JOIN LOCATION AS l on m.location_id == l.location_id
+    JOIN TEAM AS t1 ON m._team1_id == t1.team_id
+    JOIN TEAM AS t2 ON m._team2_id == t2.team_id
+    JOIN LOCATION AS l on m._location_id == l.location_id
     WHERE match_id = (?)
     """ 
     params = (match_id, )

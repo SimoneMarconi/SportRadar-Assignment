@@ -103,8 +103,12 @@ def getFilterSoldOut():
     res = soldOutMatches(conn, date)
     return res
 
-@app.route("/leaderboard", methods=["POST"])
+@app.route("/leaderboard", methods=["GET", "POST"])
 def getLeaderboard():
+    if request.method == "GET":
+        conn = getDb()
+        res = getLeaderBoard(conn, None)
+        return res
     data = request.json
     if not data:
         return jsonify({"message": "missing payload"}), 400
