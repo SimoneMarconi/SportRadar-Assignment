@@ -34,3 +34,23 @@ type MatchInfo = {
     tickets_sold: number
     total_seats: number
 }
+
+type LeaderBoardCardProps = {
+    team_name: string
+    location_name: string
+    wins: number
+}
+
+type MatchesProps = {
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+type TopBarProps = {
+    page: PageState
+    setPage: React.Dispatch<React.SetStateAction<PageState>>
+}
+
+type SportFilterProps = {
+    sportFilter: SportType
+    setSportFilter: React.Dispatch<React.SetStateAction<SportType>>
+}

@@ -98,11 +98,13 @@ def soldOutMatches(conn: sqlite3.Connection, date: str):
 
 def getLeaderBoard(conn: sqlite3.Connection, sportName: str):
     query = """
-    SELECT t.name AS team_name, COUNT(*) AS wins
-    FROM TEAM t
-    JOIN MATCH m
+    SELECT t.name AS team_name, l.name AS location_name, COUNT(*) AS wins
+    FROM TEAM AS t
+    JOIN MATCH AS m
         ON (t.team_id = m.team1_id AND m.score_team1 >= m.score_team2 AND m.live = false)
         OR (t.team_id = m.team2_id AND m.score_team2 >= m.score_team1 AND m.live = false)
+    JOIN LOCATION AS l
+    ON t.location_id = l.location_id
     WHERE t.sport = (?)
     GROUP BY t.team_id
     ORDER BY wins DESC;

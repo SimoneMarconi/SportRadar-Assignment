@@ -127,7 +127,6 @@
     color: var(--muted);
 }
 
-/* VS chip */
 .team-versus {
     font-weight: 900;
     letter-spacing: 1px;
@@ -136,9 +135,4 @@
     border: 1px solid rgba(255,255,255,0.12);
     padding: 10px 12px;
     border-radius: 12px;
-}
-
-@media (max-width: 520px) {
-    .team-name { font-size: 16px; }
-    .team-score { font-size: 24px; }
 }
