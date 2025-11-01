@@ -3,6 +3,8 @@ import sqlite3
 import datetime
 from typing import Optional
 
+from werkzeug.datastructures.structures import exceptions
+
 
 def executeSQL(conn: sqlite3.Connection, query: str, params: Optional[tuple]):
     if params:
@@ -192,3 +194,16 @@ def getMatch(conn: sqlite3.Connection, match_id: int):
     params = (match_id, )
     res = executeSQL(conn, query, params)
     return res
+
+def insertMatch(conn: sqlite3.Connection, team1: int, team2: int, location: int, date: str, time: str, description: str, tickets_sold: int):
+    query = """
+    INSERT INTO MATCH (date, time, _team1_id, _team2_id, _location_id, description, tickets_sold, score_team1, score_team2, live) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """ 
+    params = (date, time, team1, team2, location, description, tickets_sold, None, None, False)
+    try:
+        conn.execute(query, params)
+        conn.commit()
+    except:
+        return False
+
+    return True

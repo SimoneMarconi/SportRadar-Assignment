@@ -55,3 +55,8 @@ type SportFilterProps = {
     sportFilter: SportType
     setSportFilter: React.Dispatch<React.SetStateAction<SportType>>
 }
+
+type EventOverlayProps = {
+    isOpen: boolean
+    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+}

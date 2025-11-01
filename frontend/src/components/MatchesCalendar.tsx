@@ -44,7 +44,9 @@ function MatchesCalendar() {
             <>
                 <PageFilter filter={pageFilter} setFilter={setPageFilter} />
                 <div className="loading-container">
-                    <div className="loading-skeleton"></div>
+                    <div className="loading-skeleton">
+                        <div className="loader"></div>
+                    </div>
                 </div>
             </>
         )

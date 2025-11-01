@@ -2,6 +2,7 @@ from flask import Flask, g, jsonify, request
 from flask_cors import CORS
 import sqlite3
 from dbHelper import *
+from validators import *
 
 app = Flask(__name__)
 CORS(app)
@@ -179,3 +180,32 @@ def getSingleMatch():
     conn = getDb()
     res = getMatch(conn, id)
     return res
+
+@app.route("/add_match", methods=["POST"])
+def addMatch():
+    data = request.json
+    if not data:
+        return jsonify({"message": "missing payload"}), 400
+    team1 = data.get("team1")
+    team2 = data.get("team2")
+    location = data.get("location")
+    date = data.get("date")
+    time = data.get("time")
+    description = data.get("description")
+    tickets_sold = data.get("tickets_sold")
+    conn = getDb()
+    teamId1 = checkTeam(conn, team1)
+    if not teamId1:
+        return jsonify({"message": "team1 not found"}), 400
+    teamId2 = checkTeam(conn, team2)
+    if not teamId2:
+        return jsonify({"message": "team2 not found"}), 400
+    locationId = checkLocation(conn, location)
+    if not locationId:
+        return jsonify({"message": "location not found"}), 400
+    if not isFutureDate(date):
+        return jsonify({"message": "date is not in the future"}), 400
+    if insertMatch(conn, teamId1, teamId2, locationId, date, time, description, tickets_sold):
+        return jsonify({"message": "match added successfully"}), 200
+    else:
+        return jsonify({"message": "failed to add match"}), 500

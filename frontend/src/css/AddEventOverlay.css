@@ -1,0 +1,101 @@
+.add-event-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(2px);
+}
+
+.add-event-form {
+    width: min(600px, 92vw);
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    padding: 24px;
+}
+
+.add-event-form > div {
+    margin-bottom: 16px;
+}
+
+.add-event-form > div:last-child {
+    margin-bottom: 0;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.add-event-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #1f2937;
+}
+
+.add-event-form input[type="text"],
+.add-event-form input[type="date"],
+.add-event-form input[type="time"],
+.add-event-form input[type="number"],
+.add-event-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #111827;
+    outline: none;
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.add-event-form input[type="text"]:focus,
+.add-event-form input[type="date"]:focus,
+.add-event-form input[type="time"]:focus,
+.add-event-form input[type="number"]:focus,
+.add-event-form textarea:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25);
+}
+
+.add-event-form textarea {
+    min-height: 84px;
+    resize: vertical;
+}
+
+.add-event-form button {
+    appearance: none;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.05s ease, box-shadow 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.add-event-form button[type="submit"] {
+    background: #3498db;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.35);
+}
+
+.add-event-form button[type="submit"]:hover {
+    background: #2f89c6;
+}
+
+.add-event-form button[type="submit"]:active {
+    transform: translateY(1px);
+}
+
+.add-event-form button[type="button"] {
+    background: #f3f4f6;
+    color: #111827;
+}
+
+.add-event-form button[type="button"]:hover {
+    background: #e5e7eb;
+}
