@@ -13,6 +13,8 @@
 }
 
 .add-event-form {
+    position: relative;
+    z-index: 100;
     width: min(600px, 92vw);
     background: #ffffff;
     border-radius: 16px;

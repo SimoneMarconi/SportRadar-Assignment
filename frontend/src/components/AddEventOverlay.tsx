@@ -38,13 +38,14 @@ function AddEventOverlay(props: EventOverlayProps) {
             });
     }
 
-    function handleClose() {
+    function handleClose(e: React.MouseEvent) {
+        e.stopPropagation()
         props.setIsOpen(false)
     }
 
     if (!props.isOpen) return null
 
-    return <div className="add-event-overlay" style={{ display: props.isOpen ? "" : "none" }}>
+    return <div className="add-event-overlay" style={{ display: props.isOpen ? "" : "none" }} onClick={handleClose}>
         <form
             className="add-event-form"
             onSubmit={handleSubmit}

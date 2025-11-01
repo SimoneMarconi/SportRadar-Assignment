@@ -52,12 +52,12 @@ function MatchesCalendar() {
         )
     } else {
         return (
-            <div>
+            <>
                 <PageFilter filter={pageFilter} setFilter={setPageFilter} />
                 <div className="cards-grid">
                     {getDisplayCards().map(card => <SportCard {...card} key={card.match_id} />)}
                 </div>
-            </div>
+            </>
 
         )
     }

@@ -1,7 +1,7 @@
 export enum CardStatus {
-    LIVE,
-    UPCOMING,
-    FINISHED
+    LIVE = "Live",
+    UPCOMING = "Basketball",
+    FINISHED = "Baseball"
 }
 
 export enum PageState {

@@ -1,7 +1,14 @@
 import { CardStatus } from "../types/sportEnums";
 import "../css/PageFilter.css"
+import FilterButton from "./FilterButton";
 
 function PageFilter(props: PageFilterProps) {
+
+    const buttons = [
+        {label: "Live", cardStatus: CardStatus.LIVE},
+        {label: "Upcoming", cardStatus: CardStatus.UPCOMING},
+        {label: "Finished", cardStatus: CardStatus.FINISHED}
+    ]
 
     function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
         const value = event.currentTarget.textContent?.toLowerCase();
@@ -15,9 +22,8 @@ function PageFilter(props: PageFilterProps) {
     }
 
     return <div className="pagefilter-container">
-        <button className={`pagefilter-button ${props.filter === CardStatus.LIVE ? "active" : ""}`} onClick={handleClick}>Live</button>
-        <button className={`pagefilter-button ${props.filter === CardStatus.UPCOMING? "active" : ""}`} onClick={handleClick}>Upcoming</button>
-        <button className={`pagefilter-button ${props.filter === CardStatus.FINISHED? "active" : ""}`} onClick={handleClick}>Finished</button>
+        {buttons.map((b) => <button className={`pagefilter-button ${props.filter === b.cardStatus ? "active" : ""}`} onClick={handleClick}>{b.label}</button>)}
+        <FilterButton />
     </div>
 }
 
