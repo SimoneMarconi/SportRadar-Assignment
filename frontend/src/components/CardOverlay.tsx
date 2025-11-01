@@ -21,7 +21,6 @@ function CardOverlay(props: OverlayProps) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 response.json().then(data => setCardInfo(data[0] as MatchInfo))
-                console.log("ciao")
                 setLoading(false)
             }
         )
@@ -56,8 +55,11 @@ function CardOverlay(props: OverlayProps) {
                 </div>
                 <div className="final-container">
                     <span className="tickets-sold">
-                        <p>Total Tickets Sold:</p>
+                        <p>Tickets Sold:</p>
                         {cardInfo.tickets_sold}
+                    </span>
+                    <span className="soldout" style={{display: cardInfo.total_seats > cardInfo.tickets_sold ? "none" : "flex"}}>
+                        SOLD OUT
                     </span>
                     <span className="total-seats">
                         <p>Total Seats:</p>

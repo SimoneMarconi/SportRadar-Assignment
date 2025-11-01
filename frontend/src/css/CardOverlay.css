@@ -76,8 +76,7 @@
 }
 
 .tickets-sold {
-    position: absolute;
-    left: 10px;
+    grid-column: 1 / 2;
     display: flex;
     gap: 5px;
     flex-direction: row;
@@ -85,9 +84,20 @@
     justify-content: center;
 }
 
+.soldout {
+    grid-column: 2 / 3;
+    font-size: 20px;
+    font-weight: 800;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    color: var(--danger);
+}
+
 .total-seats {
-    position: absolute;
-    right: 10px;
+    grid-column: 3 / 4;
     display: flex;
     flex-direction: row;
     gap: 5px;
@@ -96,10 +106,8 @@
 }
 
 .final-container {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    padding-bottom: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 @keyframes fadeIn {

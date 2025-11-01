@@ -12,7 +12,7 @@ function SportCard(props: SportCardProps) {
     return (
         <div className="card-container" onClick={handleClick}>
             <div className="card-header">
-                <span className="card-sport">{props.sport}</span>
+                <span className={`card-sport ${props.sport}`}>{props.sport}</span>
                 <span className="card-status">
                     {props.live ? "LIVE" : props.score1 ? "FINISHED" : "UPCOMING"}
                 </span>

@@ -200,10 +200,10 @@ def insertMatch(conn: sqlite3.Connection, team1: int, team2: int, location: int,
     INSERT INTO MATCH (date, time, _team1_id, _team2_id, _location_id, description, tickets_sold, score_team1, score_team2, live) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """ 
     params = (date, time, team1, team2, location, description, tickets_sold, None, None, False)
-    try:
-        conn.execute(query, params)
-        conn.commit()
-    except:
+    cursor = conn.execute(query, params)
+    conn.commit()
+    if cursor.rowcount > 0:
+        return True
+    else:
         return False
 
-    return True

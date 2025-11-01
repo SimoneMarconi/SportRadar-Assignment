@@ -66,13 +66,25 @@
     border: 1px solid rgba(255,255,255,0.12);
 }
 
-.card-sport::before {
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-image: linear-gradient(135deg, var(--accent), var(--accent-2));
+.card-sport.football {
+    background-color: var(--football);
 }
+
+.card-sport.basketball{
+    background-color: var(--basketball);
+}
+
+.card-sport.baseball{
+    background-color: var(--baseball);
+}
+
+/* .card-sport::before { */
+/*     content: ""; */
+/*     width: 8px; */
+/*     height: 8px; */
+/*     border-radius: 50%; */
+/*     background-image: linear-gradient(135deg, var(--accent), var(--accent-2)); */
+/* } */
 
 .card-main {
     display: grid;
