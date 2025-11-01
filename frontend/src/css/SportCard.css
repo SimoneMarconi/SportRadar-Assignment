@@ -6,9 +6,8 @@
     border-radius: var(--card-radius);
     padding: 12px 14px;
     background:
-        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)) padding-box,
-        linear-gradient(135deg, rgba(96,165,250,0.45), rgba(45,212,191,0.35)) border-box;
-    box-shadow: var(--shadow-lg);
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
+        linear-gradient(135deg, rgba(96,165,250,0.45), rgba(45,212,191,0.35));
     transition: transform 200ms ease, box-shadow 200ms ease;
     cursor: pointer;
 }
@@ -58,11 +57,10 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    border-radius: 999px;
+    border-radius: 20px;
     padding: 6px 12px;
     font-weight: 700;
     color: var(--text);
-    background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.12);
 }
 
@@ -78,19 +76,10 @@
     background-color: var(--baseball);
 }
 
-/* .card-sport::before { */
-/*     content: ""; */
-/*     width: 8px; */
-/*     height: 8px; */
-/*     border-radius: 50%; */
-/*     background-image: linear-gradient(135deg, var(--accent), var(--accent-2)); */
-/* } */
-
 .card-main {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    justify-items: stretch;
     gap: 14px;
     margin: 10px 4px 14px 4px;
 }
@@ -116,7 +105,6 @@
     font-size: 28px;
     font-weight: 900;
     color: var(--accent);
-    text-shadow: 0 1px 0 rgba(0,0,0,0.35);
 }
 
 .card-bottom{
@@ -126,15 +114,9 @@
     gap: 10px;
     margin: 4px;
     padding-top: 6px;
-    border-top: 1px dashed rgba(255,255,255,0.12);
 }
 
-.card-time {
-    font-size: 14px;
-    color: var(--muted);
-}
-
-.card-location {
+.card-time, .card-location {
     font-size: 14px;
     color: var(--muted);
 }

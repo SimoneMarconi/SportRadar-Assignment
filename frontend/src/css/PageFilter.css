@@ -35,22 +35,9 @@
 }
 
 .pagefilter-button:active {
-    transform: translateY(0.5px);
+    transform: translateY(1px);
 }
 
-.pagefilter-button + .pagefilter-button {
+.pagefilter-button {
     position: relative;
 }
-
-.pagefilter-button + .pagefilter-button::before {
-    content: "";
-    position: absolute;
-    left: -1px;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 18px;
-    width: 1px;
-    background: rgba(255,255,255,0.15);
-}
-
-

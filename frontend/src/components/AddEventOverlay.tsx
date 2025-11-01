@@ -50,6 +50,7 @@ function AddEventOverlay(props: EventOverlayProps) {
         <form
             className="add-event-form"
             onSubmit={handleSubmit}
+            onClick={(e) => e.stopPropagation()}
         >
             <div>
                 <label>Team 1:</label>
@@ -115,7 +116,7 @@ function AddEventOverlay(props: EventOverlayProps) {
                     onChange={e => setTicketsSold(e.target.value)}
                 />
             </div>
-            <div>
+            <div className="submit-container">
                 <button type="submit">Add Event</button>
                 {handleClose &&
                     <button type="button" onClick={handleClose}>Cancel</button>

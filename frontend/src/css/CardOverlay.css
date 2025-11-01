@@ -52,10 +52,6 @@
     line-height: 1.5;
 }
 
-.game-description {
-    box-shadow: 0 0 14px rgba(96, 165, 250, 0.15);
-}
-
 .team1-description p,
 .team2-description p {
     color: var(--accent-2);
