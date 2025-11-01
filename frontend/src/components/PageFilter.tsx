@@ -22,7 +22,7 @@ function PageFilter(props: PageFilterProps) {
     }
 
     return <div className="pagefilter-container">
-        {buttons.map((b) => <button className={`pagefilter-button ${props.filter === b.cardStatus ? "active" : ""}`} onClick={handleClick}>{b.label}</button>)}
+        {buttons.map((b) => <button className={`pagefilter-button ${props.filter === b.cardStatus ? "active" : ""}`} onClick={handleClick} key={b.label}>{b.label}</button>)}
         <FilterButton />
     </div>
 }

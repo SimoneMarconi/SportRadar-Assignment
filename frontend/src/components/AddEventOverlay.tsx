@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../css/AddEventOverlay.css";
+import ReactDOM from "react-dom";
 
 function AddEventOverlay(props: EventOverlayProps) {
 
@@ -45,7 +46,7 @@ function AddEventOverlay(props: EventOverlayProps) {
 
     if (!props.isOpen) return null
 
-    return <div className="add-event-overlay" style={{ display: props.isOpen ? "" : "none" }} onClick={handleClose}>
+    const overlay = <div className="add-event-overlay" style={{ display: props.isOpen ? "" : "none" }} onClick={handleClose}>
         <form
             className="add-event-form"
             onSubmit={handleSubmit}
@@ -122,6 +123,8 @@ function AddEventOverlay(props: EventOverlayProps) {
             </div>
         </form>
     </div>
+
+    return ReactDOM.createPortal(overlay, document.body)
 }
 
 export default AddEventOverlay

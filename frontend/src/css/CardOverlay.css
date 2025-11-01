@@ -10,7 +10,7 @@
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    animation: slideUp 700ms ease;
+    animation: fadeIn 700ms ease;
     cursor: pointer;
 }
 
@@ -25,7 +25,7 @@
     width: min(600px, 90vw);
     color: var(--text);
     cursor: default;
-    animation: slideUp 200ms ease;
+    animation: slideUp 700ms ease;
 }
 
 .overlay-container.loading {
@@ -76,12 +76,13 @@
 }
 
 .tickets-sold {
+    position: relative;
+    left: 0;
     grid-column: 1 / 2;
     display: flex;
     gap: 5px;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
 }
 
 .soldout {
@@ -102,7 +103,7 @@
     flex-direction: row;
     gap: 5px;
     align-items: center;
-    justify-content: center;
+    justify-content: right;
 }
 
 .final-container {
@@ -122,7 +123,7 @@
 
 @keyframes slideUp {
     from {
-        transform: translateY(12px);
+        transform: translateY(60px);
         opacity: 0;
     }
 
