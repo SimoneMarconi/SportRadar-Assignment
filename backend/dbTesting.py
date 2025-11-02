@@ -6,7 +6,7 @@ def evaluateQuery():
     # rows = futureNotSoldOut(cursor, "2025-10-20") 
     # rows = soldOutMatches(cursor)
     # res = getLeaderBoard(connection, "baseball")
-    res = getLiveMatches(connection)
+    res = getLiveMatches(connection, None)
     print(len(json.loads(res)))
     print(res)
 

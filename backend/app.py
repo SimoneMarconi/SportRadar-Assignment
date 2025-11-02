@@ -19,90 +19,90 @@ def getAllMatch():
     res = getAll(conn)
     return res
 
-@app.route("/match_after", methods=["POST"])
-def getFilteredTime():
-    data = request.json
-    if not data:
-        return jsonify({"message": "missing payload"}), 400
-    time = data.get("time")
-    if not time:
-        return jsonify({"message": "missing time"}), 400
-    conn = getDb()
-    res = filterAfterTime(conn, time)
-    return res
-
-@app.route("/match_team", methods=["POST"])
-def getFilterTeam():
-    data = request.json
-    if not data:
-        return jsonify({"message": "missing payload"}), 400
-    team = data.get("team")
-    if not team:
-        return jsonify({"message": "missing team"}), 400
-    conn = getDb()
-    res = filterTeamName(conn, team)
-    return res
-
-@app.route("/match_sport", methods=["POST"])
-def getFilterSport():
-    data = request.json
-    if not data:
-        return jsonify({"message": "missing payload"}), 400
-    sport = data.get("sport")
-    if not sport:
-        return jsonify({"message": "missing sport"}), 400
-    conn = getDb()
-    res = filterTeamName(conn, sport)
-    return res
-
-@app.route("/match_location", methods=["POST"])
-def getFilterLocation():
-    data = request.json
-    if not data:
-        return jsonify({"message": "missing payload"}), 400
-    location = data.get("location")
-    if not location:
-        return jsonify({"message": "missing location"}), 400
-    conn = getDb()
-    res = filterTeamName(conn, location)
-    return res
-
-
-@app.route("/match_won", methods=["POST"])
-def getFilterTeamWon():
-    data = request.json
-    if not data:
-        return jsonify({"message": "missing payload"}), 400
-    team = data.get("team")
-    if not team:
-        return jsonify({"message": "missing team"}), 400
-    conn = getDb()
-    res = filterTeamName(conn, team)
-    return res
-
-@app.route("/match_not_soldout", methods=["POST"])
-def getFilterNotSoldOut():
-    data = request.json
-    if not data:
-        return jsonify({"message": "missing payload"}), 400
-    date = data.get("date")
-    if not date:
-        return jsonify({"message": "missing date"}), 400
-    conn = getDb()
-    res = futureNotSoldOut(conn, date)
-    return res
-
-@app.route("/match_soldout", methods=["POST"])
-def getFilterSoldOut():
-    data = request.json
-    if not data:
-        return jsonify({"message": "missing payload"}), 400
-    date = data.get("date")
-    if not date:
-        return jsonify({"message": "missing date"}), 400
-    conn = getDb()
-    res = soldOutMatches(conn, date)
-    return res
+# @app.route("/match_after", methods=["POST"])
+# def getFilteredTime():
+#     data = request.json
+#     if not data:
+#         return jsonify({"message": "missing payload"}), 400
+#     time = data.get("time")
+#     if not time:
+#         return jsonify({"message": "missing time"}), 400
+#     conn = getDb()
+#     res = filterAfterTime(conn, time)
+#     return res
+#
+# @app.route("/match_team", methods=["POST"])
+# def getFilterTeam():
+#     data = request.json
+#     if not data:
+#         return jsonify({"message": "missing payload"}), 400
+#     team = data.get("team")
+#     if not team:
+#         return jsonify({"message": "missing team"}), 400
+#     conn = getDb()
+#     res = filterTeamName(conn, team)
+#     return res
+#
+# @app.route("/match_sport", methods=["POST"])
+# def getFilterSport():
+#     data = request.json
+#     if not data:
+#         return jsonify({"message": "missing payload"}), 400
+#     sport = data.get("sport")
+#     if not sport:
+#         return jsonify({"message": "missing sport"}), 400
+#     conn = getDb()
+#     res = filterTeamName(conn, sport)
+#     return res
+#
+# @app.route("/match_location", methods=["POST"])
+# def getFilterLocation():
+#     data = request.json
+#     if not data:
+#         return jsonify({"message": "missing payload"}), 400
+#     location = data.get("location")
+#     if not location:
+#         return jsonify({"message": "missing location"}), 400
+#     conn = getDb()
+#     res = filterTeamName(conn, location)
+#     return res
+#
+#
+# @app.route("/match_won", methods=["POST"])
+# def getFilterTeamWon():
+#     data = request.json
+#     if not data:
+#         return jsonify({"message": "missing payload"}), 400
+#     team = data.get("team")
+#     if not team:
+#         return jsonify({"message": "missing team"}), 400
+#     conn = getDb()
+#     res = filterTeamName(conn, team)
+#     return res
+#
+# @app.route("/match_not_soldout", methods=["POST"])
+# def getFilterNotSoldOut():
+#     data = request.json
+#     if not data:
+#         return jsonify({"message": "missing payload"}), 400
+#     date = data.get("date")
+#     if not date:
+#         return jsonify({"message": "missing date"}), 400
+#     conn = getDb()
+#     res = futureNotSoldOut(conn, date)
+#     return res
+#
+# @app.route("/match_soldout", methods=["POST"])
+# def getFilterSoldOut():
+#     data = request.json
+#     if not data:
+#         return jsonify({"message": "missing payload"}), 400
+#     date = data.get("date")
+#     if not date:
+#         return jsonify({"message": "missing date"}), 400
+#     conn = getDb()
+#     res = soldOutMatches(conn, date)
+#     return res
 
 @app.route("/leaderboard", methods=["GET", "POST"])
 def getLeaderboard():
@@ -121,53 +121,53 @@ def getLeaderboard():
     return res
 
 
-@app.route("/live_matches", methods=["POST"])
-def getLive():
-    data = request.json
-    if not data:
-        return jsonify({"message": "missing payload"}), 400
-    sport = data.get("sport")
-    if sport:
-        conn = getDb()
-        res = getLiveMatches(conn, sport)
-    else:
-        conn = getDb()
-        res = getLiveMatches(conn, None)
-    return res
+# @app.route("/live_matches", methods=["POST"])
+# def getLive():
+#     data = request.json
+#     if not data:
+#         return jsonify({"message": "missing payload"}), 400
+#     sport = data.get("sport")
+#     if sport:
+#         conn = getDb()
+#         res = getLiveMatches(conn, sport)
+#     else:
+#         conn = getDb()
+#         res = getLiveMatches(conn, None)
+#     return res
 
-@app.route("/upcoming_matches", methods=["POST"])
-def getUpcoming():
-    data = request.json
-    if not data:
-        return jsonify({"message": "missing payload"}), 400
-    sport = data.get("sport")
-    date = data.get("date")
-    if not date:
-        return jsonify({"message": "missing date"}), 400
-    if sport:
-        conn = getDb()
-        res = getUpcomingMatches(conn, sport, date)
-    else:
-        conn = getDb()
-        res = getUpcomingMatches(conn, None, date)
-    return res
+# @app.route("/upcoming_matches", methods=["POST"])
+# def getUpcoming():
+#     data = request.json
+#     if not data:
+#         return jsonify({"message": "missing payload"}), 400
+#     sport = data.get("sport")
+#     date = data.get("date")
+#     if not date:
+#         return jsonify({"message": "missing date"}), 400
+#     if sport:
+#         conn = getDb()
+#         res = getUpcomingMatches(conn, sport, date)
+#     else:
+#         conn = getDb()
+#         res = getUpcomingMatches(conn, None, date)
+#     return res
 
-@app.route("/finished_matches", methods=["POST"])
-def getFinished():
-    data = request.json
-    if not data:
-        return jsonify({"message": "missing payload"}), 400
-    sport = data.get("sport")
-    date = data.get("date")
-    if not date:
-        return jsonify({"message": "missing date"}), 400
-    if sport:
-        conn = getDb()
-        res = getFinishedMatches(conn, sport, date)
-    else:
-        conn = getDb()
-        res = getFinishedMatches(conn, None, date)
-    return res
+# @app.route("/finished_matches", methods=["POST"])
+# def getFinished():
+#     data = request.json
+#     if not data:
+#         return jsonify({"message": "missing payload"}), 400
+#     sport = data.get("sport")
+#     date = data.get("date")
+#     if not date:
+#         return jsonify({"message": "missing date"}), 400
+#     if sport:
+#         conn = getDb()
+#         res = getFinishedMatches(conn, sport, date)
+#     else:
+#         conn = getDb()
+#         res = getFinishedMatches(conn, None, date)
+#     return res
 
 @app.route("/single_match", methods=["POST"])
 def getSingleMatch():

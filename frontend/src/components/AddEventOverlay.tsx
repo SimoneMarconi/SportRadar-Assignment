@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../css/AddEventOverlay.css";
 import ReactDOM from "react-dom";
+import { toast } from "sonner";
 
 function AddEventOverlay(props: EventOverlayProps) {
 
@@ -29,9 +30,12 @@ function AddEventOverlay(props: EventOverlayProps) {
                 tickets_sold: Number(ticketsSold)
             }),
         })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
+            .then(response => {
+                if (response.status !== 200) {
+                    response.json().then(data => toast.error(data.message))
+                    return
+                } 
+                window.location.reload()
                 props.setIsOpen(false)
             })
             .catch(error => {
