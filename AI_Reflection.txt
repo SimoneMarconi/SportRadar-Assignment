@@ -1,13 +1,25 @@
-Prompts:
-1) I am going to provide to you the tables of a database written in python3 for SQLite3, I want you to create at lease 20 matches with at least 15 teams and 10 locations, the data should follow this rules:
-- integrate the following sports -> football, basketball, baseball 
-- add a quick description for every team 
-- you don't need to add descriptions to every match 
-- make sure that the sold tickets for a match are at most equal to the number of seats available for the location 
-- the scores of the matches should follow this format "score_team_1 : score_team_2" 
-- not every team has a stable location where they train so you can leave some NULL 
+The parts of the project I worked on without the use of AI are:
+- Design of the database schema and queries
+- Design of frontend and backend interactions
+- Design of the Flask implementation
+- Design of frontend components
 
-Here is the database schema: ...
-1.1) Now create some more matches with None scores, this are matches that haven't been played yet
+The parts generated entirely by AI are the dummy data entries inserted into the database. The prompt for this was:
+I am going to provide you with the tables of a database written in Python 3 for SQLite3. I want you to create at least 20 matches with at least 15 teams and 10 locations. The data should follow these rules:
+- Include the following sports: football, basketball, baseball
+- Add a short description for every team
+- You don’t need to add descriptions to every match
+- Make sure that the number of sold tickets for a match does not exceed the number of available seats for the location
+- Not every team has a stable training location, so you can leave some fields as NULL
 
-2) What is the best way to handle a sqlite3 connection context in flask using Python
+With this prompt, I was able to successfully generate valid data to test and use in my database.
+The list of constraints was the most important part of the prompt, as it guided the output I wanted and prevented the LLM from generating hallucinations or incoherent data.
+
+I also used AI to help me write the CSS styling for the HTML elements.
+All the generated CSS was later reviewed by me, since the AI initially produced a lot of unnecessary rules. My approach was to first write all the required HTML elements for a component and then use that skeleton code in the prompt for the AI to generate the styling.
+Additionally, after defining the style used for the main page, I included those CSS rules in every subsequent prompt to give better context about the desired appearance of my UI.
+
+One of the most important decisions I made during this project concerned when and how to connect to the database to retrieve data. I decided to minimize database calls to enhance frontend performance, as all the main filters are applied client-side and the database is queried only to fetch the complete dataset (depending on the requested page).
+This approach works well as long as the dataset is not too large. If the database grows and query times become too slow, possible improvements could include trimming old data from queries or implementing a caching system that queries the database only when necessary.
+
+If I had more time and resources, I would add a feature to purchase tickets directly from the site, as well as an integration with Google Maps to better display match locations and provide directions to reach them (currently, I only provide coordinates).
