@@ -14,4 +14,19 @@
     position: absolute;
     top: 40px;
     background-color: rgba(0, 0, 0, 0.5);
+    height: 40px;
+    z-index: 100;
+}
+
+.filter-button {
+    border-radius: 10px;
+    font-weight: 800;
+    background-color: var(--accent);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+
+.filter-button:hover {
+    background-color: var(--accent-2);
 }

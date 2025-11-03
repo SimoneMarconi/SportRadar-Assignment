@@ -5,7 +5,7 @@ import MatchesCalendar from './components/MatchesCalendar'
 import LeaderBoard from './components/LeaderBoard'
 import TopBar from './components/TopBar'
 import { Toaster } from 'sonner'
-import {AppProvider} from "../context/AppContext"
+import AppProvider from "../context/AppContext"
 
 function App() {
     const [page, setPage] = useState<PageState>(PageState.MATCHES)
