@@ -6,28 +6,14 @@ import { AppContext } from "../../context/AppContext";
 
 function MatchesCalendar() {
 
-    const [loading, setLoading] = useState(true)
+    // const [loading, setLoading] = useState(true)
     const [pageFilter, setPageFilter] = useState<CardStatus>(CardStatus.LIVE)
     const [cards, setCards] = useState<SportCardProps[]>([])
     const context = useContext(AppContext)
 
     useEffect(() => {
         setCards(context.cards)
-        setLoading(false)
-    })
-
-    // useEffect(() => {
-    //     fetch('http://localhost:5000/get_all_match', {
-    //     })
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             setCards(data)
-    //             setLoading(false)
-    //         })
-    //         .catch(error => {
-    //             console.error('Request error:', error);
-    //         });
-    // }, [])
+    }, [context.cards])
 
     function getDisplayCards() {
         const now = new Date()
@@ -46,7 +32,7 @@ function MatchesCalendar() {
                 })
         }
     }
-    if (loading) {
+    if (context.loading) {
         return (
             <>
                 <PageFilter filter={pageFilter} setFilter={setPageFilter} />

@@ -23,3 +23,5 @@ One of the most important decisions I made during this project concerned when an
 This approach works well as long as the dataset is not too large. If the database grows and query times become too slow, possible improvements could include trimming old data from queries or implementing a caching system that queries the database only when necessary.
 
 If I had more time and resources, I would add a feature to purchase tickets directly from the site, as well as an integration with Google Maps to better display match locations and provide directions to reach them (currently, I only provide coordinates).
+
+The main AI tools I used are Cursor (for code generation, like the css files), ChatGPT and Claude AI (for questions when programming).
