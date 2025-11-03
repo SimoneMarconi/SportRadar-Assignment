@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "../css/AddEventOverlay.css";
 import ReactDOM from "react-dom";
 import { toast } from "sonner";
+import { AppContext } from "../../context/AppContext";
 
 function AddEventOverlay(props: EventOverlayProps) {
 
@@ -12,6 +13,7 @@ function AddEventOverlay(props: EventOverlayProps) {
     const [time, setTime] = useState("")
     const [description, setDescription] = useState("")
     const [ticketsSold, setTicketsSold] = useState<string>("0")
+    const context = useContext(AppContext)
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -35,7 +37,7 @@ function AddEventOverlay(props: EventOverlayProps) {
                     response.json().then(data => toast.error(data.message))
                     return
                 } 
-                window.location.reload()
+                context.refresh()
                 props.setIsOpen(false)
             })
             .catch(error => {

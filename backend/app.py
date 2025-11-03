@@ -19,17 +19,18 @@ def getAllMatch():
     res = getAll(conn)
     return res
 
-# @app.route("/match_after", methods=["POST"])
-# def getFilteredTime():
-#     data = request.json
-#     if not data:
-#         return jsonify({"message": "missing payload"}), 400
-#     time = data.get("time")
-#     if not time:
-#         return jsonify({"message": "missing time"}), 400
-#     conn = getDb()
-#     res = filterAfterTime(conn, time)
-#     return res
+@app.route("/match_after", methods=["POST"])
+def getFilteredTime():
+    data = request.json
+    if not data:
+        return jsonify({"message": "missing payload"}), 400
+    time = data.get("time")
+    if not time:
+        return jsonify({"message": "missing time"}), 400
+    conn = getDb()
+    print(time)
+    res = filterAfterTime(conn, time)
+    return res
 #
 # @app.route("/match_team", methods=["POST"])
 # def getFilterTeam():

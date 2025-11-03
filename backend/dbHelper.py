@@ -3,9 +3,6 @@ import sqlite3
 import datetime
 from typing import Optional
 
-from werkzeug.datastructures.structures import exceptions
-
-
 def executeSQL(conn: sqlite3.Connection, query: str, params: Optional[tuple]):
     if params:
         cursor = conn.execute(query, params)
@@ -27,8 +24,8 @@ def filterAfterTime(conn: sqlite3.Connection, date: datetime.date):
     WHERE datetime(date) > datetime(?);
     """
     params = (date, )
-    executeSQL(conn, query, params)
-    return 
+    res = executeSQL(conn, query, params)
+    return res
 
 def filterTeamName(conn: sqlite3.Connection, teamName: str):
     query = """

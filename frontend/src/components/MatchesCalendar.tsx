@@ -1,26 +1,33 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import PageFilter from "./PageFilter";
 import { CardStatus } from "../types/sportEnums";
 import SportCard from "./SportCard";
+import { AppContext } from "../../context/AppContext";
 
 function MatchesCalendar() {
 
     const [loading, setLoading] = useState(true)
     const [pageFilter, setPageFilter] = useState<CardStatus>(CardStatus.LIVE)
     const [cards, setCards] = useState<SportCardProps[]>([])
+    const context = useContext(AppContext)
 
     useEffect(() => {
-        fetch('http://localhost:5000/get_all_match', {
-        })
-            .then(response => response.json())
-            .then(data => {
-                setCards(data)
-                setLoading(false)
-            })
-            .catch(error => {
-                console.error('Request error:', error);
-            });
-    }, [])
+        setCards(context.cards)
+        setLoading(false)
+    })
+
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/get_all_match', {
+    //     })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             setCards(data)
+    //             setLoading(false)
+    //         })
+    //         .catch(error => {
+    //             console.error('Request error:', error);
+    //         });
+    // }, [])
 
     function getDisplayCards() {
         const now = new Date()

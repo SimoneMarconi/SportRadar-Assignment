@@ -60,3 +60,10 @@ type EventOverlayProps = {
     isOpen: boolean
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
+
+type AppContextValue = {
+    cards: SportCardProps[];
+    dateFilter: string | null;
+    setDateFilter: React.Dispatch<React.SetStateAction<string | null>>;
+    refresh: () => void;
+};

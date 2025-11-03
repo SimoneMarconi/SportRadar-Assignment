@@ -1,4 +1,4 @@
-.filter-button {
+.filter-container{
     position: relative;
     left: 40px;
     cursor: pointer;
@@ -6,6 +6,12 @@
     border-radius: 10px;
 }
 
-.filter-button:hover {
+.filter-container:hover {
     background-color: rgba(255, 255, 255, 0.2);
+}
+
+.filter-input-container {
+    position: absolute;
+    top: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
 }
