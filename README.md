@@ -94,4 +94,4 @@ The following diagram represents the database schema and entity relationships us
 
 ## Assumptions
 - Leaderboard Points System: Each team receives 1 point for a win or a draw, and 0 points for a loss. This point system applies equally to all sports within the application.
-- Match Creation Requirements: When inserting a new match, the provided team names and location must already exist in the database.
+- Match Creation Requirements: When inserting a new match, the provided team names and location must already exist in the database, the match must be played in a future time and the teams must play the same sport.
