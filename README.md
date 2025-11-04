@@ -17,9 +17,9 @@ This setup ensures fast rendering and a smooth user experience.
 ```bash
 git clone https://github.com/SimoneMarconi/SportRadar-Assignment
 cd SportRadar-Assignment
-2. Run with Docker (Recommended)
 ```
 
+### 2. Run with Docker (Recommended)
 The easiest and most reliable way to run the application is via Docker.
 Make sure Docker and Docker Compose are installed, then run:
 
@@ -30,17 +30,17 @@ This command builds and starts both the frontend and backend containers.
 Once started, the application will be available at:
 http://localhost:80
 
-3. Run Manually (Without Docker)
+### 3. Run Manually (Without Docker)
 If you prefer to run the application manually:
 
-Backend Setup
+**Backend Setup**
 ``` bash
 cd backend
 pip install -r requirements.txt
-python app.py
+flask --app app run
 ```
 
-Frontend Setup
+**Frontend Setup**
 ```bash
 cd frontend
 npm install
@@ -49,6 +49,7 @@ npm run dev
 or, if you use pnpm:
 
 ```bash
+cd frontend
 pnpm install
 pnpm run dev
 ```
