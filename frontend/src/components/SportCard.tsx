@@ -34,7 +34,7 @@ function SportCard(props: SportCardProps) {
                 <div className="card-time">
                     {props.date} {props.time}
                 </div>
-                <div className="card-location">{props.location_name}</div>
+                <div title="Match Location" className="card-location">{props.location_name}</div>
             </div>
             {
                 activeOverlay && <CardOverlay
