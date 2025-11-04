@@ -58,7 +58,7 @@ function CardOverlay(props: OverlayProps) {
                         <p>Tickets Sold:</p>
                         {cardInfo.tickets_sold}
                     </span>
-                    <span className="soldout" style={{display: cardInfo.total_seats > cardInfo.tickets_sold ? "none" : "flex"}}>
+                    <span className="soldout" style={{ display: cardInfo.total_seats > cardInfo.tickets_sold ? "none" : "flex" }}>
                         SOLD OUT
                     </span>
                     <span className="total-seats">

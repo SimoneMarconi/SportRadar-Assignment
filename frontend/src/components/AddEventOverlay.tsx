@@ -36,7 +36,7 @@ function AddEventOverlay(props: EventOverlayProps) {
                 if (response.status !== 200) {
                     response.json().then(data => toast.error(data.message))
                     return
-                } 
+                }
                 context.refresh()
                 props.setIsOpen(false)
             })

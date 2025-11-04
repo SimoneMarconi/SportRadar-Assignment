@@ -11,18 +11,18 @@ function TopBar(props: TopBarProps) {
         const value = event.currentTarget.textContent?.toLowerCase();
         if (props.page === PageState.MATCHES && value === "leaderboards") {
             props.setPage(PageState.LEADERBOARD)
-        } else if (props.page === PageState. LEADERBOARD && value === "matches"){
+        } else if (props.page === PageState.LEADERBOARD && value === "matches") {
             props.setPage(PageState.MATCHES)
         }
     }
 
-    function addEventClick(){
+    function addEventClick() {
         setAddEventActive(true)
     }
 
     return <div className="bar-container">
         <button className="addevent-button" onClick={addEventClick}>+</button>
-        {addEventActive && <AddEventOverlay isOpen={addEventActive} setIsOpen={setAddEventActive}/>}
+        {addEventActive && <AddEventOverlay isOpen={addEventActive} setIsOpen={setAddEventActive} />}
         <button className="bar-button" onClick={handleClick}>Matches</button>
         <button className="bar-button" onClick={handleClick}>Leaderboards</button>
     </div>

@@ -1,4 +1,4 @@
-.filter-container{
+.filter-container {
     position: relative;
     left: 40px;
     cursor: pointer;
@@ -13,9 +13,14 @@
 .filter-input-container {
     position: absolute;
     top: 40px;
+    left: -40px;
     background-color: rgba(0, 0, 0, 0.5);
     height: 40px;
     z-index: 100;
+}
+
+.filter-input {
+    border-radius: 10px;
 }
 
 .filter-button {

@@ -19,53 +19,49 @@ type PageFilterProps = {
 };
 
 type OverlayProps = {
-    match_id: number
-    isOverlay: boolean
-    setIsOverlay: React.Dispatch<React.SetStateAction<boolean>>
-}
+  match_id: number;
+  isOverlay: boolean;
+  setIsOverlay: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 type MatchInfo = {
-    match_description: string
-    team1: string
-    team2: string
-    team1_description: string
-    team2_description: string
-    coordinates: string
-    tickets_sold: number
-    total_seats: number
-}
+  match_description: string;
+  team1: string;
+  team2: string;
+  team1_description: string;
+  team2_description: string;
+  coordinates: string;
+  tickets_sold: number;
+  total_seats: number;
+};
 
 type LeaderBoardCardProps = {
-    team_name: string
-    location_name: string
-    wins: number
-    sport: string
-}
-
-type MatchesProps = {
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>
-}
+  team_name: string;
+  location_name: string;
+  wins: number;
+  sport: string;
+};
 
 type TopBarProps = {
-    page: PageState
-    setPage: React.Dispatch<React.SetStateAction<PageState>>
-}
+  page: PageState;
+  setPage: React.Dispatch<React.SetStateAction<PageState>>;
+};
 
 type SportFilterProps = {
-    sportFilter: SportType
-    setSportFilter: React.Dispatch<React.SetStateAction<SportType>>
-}
+  sportFilter: SportType;
+  setSportFilter: React.Dispatch<React.SetStateAction<SportType>>;
+};
 
 type EventOverlayProps = {
-    isOpen: boolean
-    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
-}
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 type AppContextValue = {
-    cards: SportCardProps[];
-    loading: boolean
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-    dateFilter: string | null;
-    setDateFilter: React.Dispatch<React.SetStateAction<string | null>>;
-    refresh: () => void;
+  cards: SportCardProps[];
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  dateFilter: string | null;
+  setDateFilter: React.Dispatch<React.SetStateAction<string | null>>;
+  refresh: () => void;
 };

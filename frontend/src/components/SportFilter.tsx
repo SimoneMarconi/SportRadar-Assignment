@@ -2,12 +2,12 @@ import { SportType } from "../types/sportEnums";
 
 import "../css/SportFilter.css"
 
-function SportFilter({sportFilter, setSportFilter}: SportFilterProps) {
+function SportFilter({ sportFilter, setSportFilter }: SportFilterProps) {
 
     const sportButtons = [
-        {label: "Football", type: SportType.FOOTBALL},
-        {label: "BasketBall", type: SportType.BASKETBALL},
-        {label: "Baseball", type: SportType.BASEBALL},
+        { label: "Football", type: SportType.FOOTBALL },
+        { label: "BasketBall", type: SportType.BASKETBALL },
+        { label: "Baseball", type: SportType.BASEBALL },
     ]
 
     function handleClick(event: React.MouseEvent<HTMLButtonElement>) {

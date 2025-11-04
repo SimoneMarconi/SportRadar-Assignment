@@ -9,7 +9,7 @@ export enum PageState {
     LEADERBOARD
 }
 
-export enum SportType{
+export enum SportType {
     FOOTBALL = "football",
     BASKETBALL = "basketball",
     BASEBALL = "baseball"

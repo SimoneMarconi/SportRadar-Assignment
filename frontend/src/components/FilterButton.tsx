@@ -6,7 +6,7 @@ function FilterButton() {
 
     const [date, setDate] = useState<string>("")
     const [isOpen, setIsOpen] = useState<boolean>(false)
-    const context = useContext(AppContext) 
+    const context = useContext(AppContext)
 
     function handleFilter(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
@@ -24,7 +24,7 @@ function FilterButton() {
         <div className="filter-container" onClick={handleClick}>
             <img src="../../static/bars-filter.svg" height="25px" width="25px" />
             <div className="filter-input-container" style={{ display: isOpen ? "flex" : "none" }}>
-                <input type="date" value={date} onChange={e => setDate(e.target.value)} onClick={(e) => e.stopPropagation()}/>
+                <input className="filter-input" type="date" value={date} onChange={e => setDate(e.target.value)} onClick={(e) => e.stopPropagation()} />
                 <button className="filter-button" type="submit" onClick={handleFilter}>Filter</button>
             </div>
         </div>

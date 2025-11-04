@@ -24,7 +24,7 @@
     animation: expandIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.add-event-form > div {
+.add-event-form>div {
     margin-bottom: 10px;
 }
 
@@ -102,7 +102,7 @@
     background: #e5e7eb;
 }
 
-@keyframes expandIn{
+@keyframes expandIn {
     from {
         opacity: 0;
         transform: scale(0);

@@ -13,9 +13,9 @@ function App() {
     return <>
         <AppProvider>
             <Toaster richColors position="top-right" />
-            <TopBar page={page} setPage={setPage}/>
-            {page === PageState.MATCHES && <MatchesCalendar/>}
-            {page === PageState.LEADERBOARD && <LeaderBoard/>}
+            <TopBar page={page} setPage={setPage} />
+            {page === PageState.MATCHES && <MatchesCalendar />}
+            {page === PageState.LEADERBOARD && <LeaderBoard />}
         </AppProvider>
     </>
 

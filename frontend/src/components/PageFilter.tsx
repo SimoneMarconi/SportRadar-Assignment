@@ -5,9 +5,9 @@ import FilterButton from "./FilterButton";
 function PageFilter(props: PageFilterProps) {
 
     const buttons = [
-        {label: "Live", cardStatus: CardStatus.LIVE},
-        {label: "Upcoming", cardStatus: CardStatus.UPCOMING},
-        {label: "Finished", cardStatus: CardStatus.FINISHED}
+        { label: "Live", cardStatus: CardStatus.LIVE },
+        { label: "Upcoming", cardStatus: CardStatus.UPCOMING },
+        { label: "Finished", cardStatus: CardStatus.FINISHED }
     ]
 
     function handleClick(event: React.MouseEvent<HTMLButtonElement>) {

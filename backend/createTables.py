@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS MATCH (
     _team2_id INTEGER,
     score_team1 INTEGER,
     score_team2 INTEGER,
-    _location_id INTEGER,
+    _location_id INTEGER NOT NULL,
     description TEXT,
     tickets_sold INT,
     live BOOLEAN,

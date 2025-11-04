@@ -6,7 +6,6 @@ import { AppContext } from "../../context/AppContext";
 
 function MatchesCalendar() {
 
-    // const [loading, setLoading] = useState(true)
     const [pageFilter, setPageFilter] = useState<CardStatus>(CardStatus.LIVE)
     const [cards, setCards] = useState<SportCardProps[]>([])
     const context = useContext(AppContext)
