@@ -37,22 +37,24 @@ If you prefer to run the application manually:
 ``` bash
 cd backend
 pip install -r requirements.txt
-flask --app app run
 ```
 
 **Frontend Setup**
 ```bash
 cd frontend
 npm install
-npm run dev
 ```
 or, if you use pnpm:
 
 ```bash
 cd frontend
 pnpm install
-pnpm run dev
 ```
+Then run the `start.py` script in the project root with:
+``` bash
+python3 start.py
+```
+
 ## Project Structure
 ```
 ├── AI_Reflection.txt
