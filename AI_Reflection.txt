@@ -19,8 +19,8 @@ I also used AI to help me write the CSS styling for the HTML elements.
 All the generated CSS was later reviewed by me, since the AI initially produced a lot of unnecessary rules. My approach was to first write all the required HTML elements for a component and then use that skeleton code in the prompt for the AI to generate the styling.
 Additionally, after defining the style used for the main page, I included those CSS rules in every subsequent prompt to give better context about the desired appearance of my UI.
 
-One of the most important decisions I made during this project concerned when and how to connect to the database to retrieve data. I decided to minimize database calls to enhance frontend performance, as all the main filters are applied client-side and the database is queried only to fetch the complete dataset (depending on the requested page).
-This approach works well as long as the dataset is not too large. If the database grows and query times become too slow, possible improvements could include trimming old data from queries or implementing a caching system that queries the database only when necessary.
+One of the most important decisions I made during this project concerned when and how to connect to the database to retrieve data. I decided to minimize database calls to enhance frontend performance, as all the main filters are applied client-side and the database is queried mainly to fetch the complete dataset (depending on the requested page).
+This approach works well as long as the dataset is not too large. If the database grows and query times become too slow, possible improvements could include trimming old data from queries, implementing multiple pages to have progressive queries or implementing a caching system to limit database calls.
 
 If I had more time and resources, I would add a feature to purchase tickets directly from the site, as well as an integration with Google Maps to better display match locations and provide directions to reach them (currently, I only provide coordinates).
 

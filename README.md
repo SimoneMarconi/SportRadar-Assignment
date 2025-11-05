@@ -11,6 +11,11 @@ It handles data management, validation, and API communication with the frontend.
 The frontend is built with **TypeScript** and **React**, providing a responsive and interactive user interface.  
 This setup ensures fast rendering and a smooth user experience.
 
+## Assumptions
+- Leaderboard Points System: Each team receives 1 point for a win or a draw, and 0 points for a loss. This point system applies equally to all sports within the application.
+- Match Creation Requirements: When inserting a new match, the provided team names and location must already exist in the database, the match must be played in a future time and the teams must play the same sport.
+- Database Dimension: The database is assumed to be relatively small. If it were larger (for example, containing thousands of entries) the issue could be addressed by limiting the number of elements retrieved per query and implementing pagination on the frontend, displaying the data across multiple pages according to the total number of entries in the database.
+
 ## Getting Started
 
 ### 1. Clone the Repository
@@ -54,6 +59,8 @@ Then run the `start.py` script in the project root with:
 ``` bash
 python3 start.py
 ```
+the application now will be available at:
+http://localhost:5173
 
 ## Project Structure
 ```
@@ -94,6 +101,3 @@ The following diagram represents the database schema and entity relationships us
 
 ![Diagram](SportRadar.drawio.svg)
 
-## Assumptions
-- Leaderboard Points System: Each team receives 1 point for a win or a draw, and 0 points for a loss. This point system applies equally to all sports within the application.
-- Match Creation Requirements: When inserting a new match, the provided team names and location must already exist in the database, the match must be played in a future time and the teams must play the same sport.
