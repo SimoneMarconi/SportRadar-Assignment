@@ -1,12 +1,17 @@
 from flask import Flask, g, jsonify, request
 from flask_cors import CORS
 import sqlite3
+
 from dbHelper import *
 from validators import *
+from cache import SimpleCache
 
 app = Flask(__name__)
 CORS(app)
 DATABASE = "sports.db"
+
+
+cache = SimpleCache()
 
 def getDb():
     if "db" not in g:
@@ -16,9 +21,15 @@ def getDb():
 # get all matches in the database
 @app.route("/get_all_match", methods=["GET"])
 def getAllMatch():
+    c = cache.get("all_match")
+    if c != None:
+        return c
     conn = getDb()
+    print("all_match query")
     res = getAll(conn)
+    cache.add("all_match", res)
     return res
+
 # get all the matches after a specific date
 @app.route("/match_after", methods=["POST"])
 def getFilteredTime():
@@ -36,9 +47,14 @@ def getFilteredTime():
 # get the leaderboard data ordered
 @app.route("/leaderboard", methods=["GET", "POST"])
 def getLeaderboard():
+    c = cache.get("leaderboard")
+    if c != None:
+        return c
     if request.method == "GET":
         conn = getDb()
+        print("leaderboard query")
         res = getLeaderBoard(conn, None)
+        cache.add("leaderboard", res)
         return res
     data = request.json
     if not data:
@@ -48,6 +64,7 @@ def getLeaderboard():
         return jsonify({"message": "missing sport"}), 400
     conn = getDb()
     res = getLeaderBoard(conn, sport)
+    cache.add("leaderboard", res)
     return res
 
 # get informations for a single match
@@ -57,10 +74,15 @@ def getSingleMatch():
     if not data:
         return jsonify({"message": "missing payload"}), 400
     id = data.get("match_id")
+    c = cache.get(f"match:{id}")
+    if c != None:
+        return c
     if not id:
         return jsonify({"message": "missing id"}), 400
     conn = getDb()
+    print("match info query")
     res = getMatch(conn, id)
+    cache.add(f"match:{id}", res)
     return res
 
 # get informations for a single match
@@ -70,6 +92,7 @@ def buyTicket():
     if not data:
         return jsonify({"message": "missing payload"}), 400
     id = data.get("match_id")
+    cache.invalidate(f"match:{id}")
     if not id:
         return jsonify({"message": "missing id"}), 400
     conn = getDb()
@@ -79,6 +102,7 @@ def buyTicket():
 # add a match to the total
 @app.route("/add_match", methods=["POST"])
 def addMatch():
+    cache.invalidate("all_match")
     data = request.json
     if not data:
         return jsonify({"message": "missing payload"}), 400
