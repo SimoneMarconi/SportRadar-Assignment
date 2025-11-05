@@ -13,12 +13,13 @@ def getDb():
         g.db = sqlite3.connect(DATABASE)
     return g.db
 
+# get all matches in the database
 @app.route("/get_all_match", methods=["GET"])
 def getAllMatch():
     conn = getDb()
     res = getAll(conn)
     return res
-
+# get all the matches after a specific date
 @app.route("/match_after", methods=["POST"])
 def getFilteredTime():
     data = request.json
@@ -32,6 +33,7 @@ def getFilteredTime():
     res = filterAfterTime(conn, time)
     return res
 
+# get the leaderboard data ordered
 @app.route("/leaderboard", methods=["GET", "POST"])
 def getLeaderboard():
     if request.method == "GET":
@@ -48,6 +50,7 @@ def getLeaderboard():
     res = getLeaderBoard(conn, sport)
     return res
 
+# get informations for a single match
 @app.route("/single_match", methods=["POST"])
 def getSingleMatch():
     data = request.json
@@ -60,6 +63,7 @@ def getSingleMatch():
     res = getMatch(conn, id)
     return res
 
+# add a match to the total
 @app.route("/add_match", methods=["POST"])
 def addMatch():
     data = request.json

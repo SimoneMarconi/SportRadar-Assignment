@@ -3,6 +3,7 @@ import sqlite3
 import datetime
 from dbHelper import executeSQL
 
+# check if a team name is in the database and return it's id
 def checkTeam(conn: sqlite3.Connection, team_name: str):
     query = """
     SELECT team_id FROM TEAM
@@ -15,6 +16,7 @@ def checkTeam(conn: sqlite3.Connection, team_name: str):
         return None
     return d[0]["team_id"]
 
+# check if the sport of the two teams provided is the same
 def checkSports(conn:sqlite3.Connection, team_name1: str, team_name2: str):
     query = """
     SELECT COUNT(DISTINCT sport) AS total FROM TEAM
@@ -31,6 +33,7 @@ def checkSports(conn:sqlite3.Connection, team_name1: str, team_name2: str):
         return True
 
 
+# check if the location provided exists in the database
 def checkLocation(conn: sqlite3.Connection, location_name: str):
     query = """
     SELECT location_id FROM LOCATION
@@ -43,6 +46,7 @@ def checkLocation(conn: sqlite3.Connection, location_name: str):
         return None
     return d[0]["location_id"]
 
+# check if the data provided is a future date
 def isFutureDate(date: str):
     try:
         input_date = datetime.datetime.strptime(date, "%Y-%m-%d").date()

@@ -3,6 +3,8 @@ import sqlite3
 
 from validators import checkSports
 
+# testing file to quickly check working of queries and functions
+
 def evaluateQuery():
     connection = sqlite3.connect("sports.db")
     # rows = futureNotSoldOut(cursor, "2025-10-20") 
