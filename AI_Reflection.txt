@@ -22,6 +22,9 @@ Additionally, after defining the style used for the main page, I included those 
 One of the most important decisions I made during this project concerned when and how to connect to the database to retrieve data. I decided to minimize database calls to enhance frontend performance, as all the main filters are applied client-side and the database is queried mainly to fetch the complete dataset (depending on the requested page).
 This approach works well as long as the dataset is not too large. If the database grows and query times become too slow, possible improvements could include trimming old data from queries, implementing multiple pages to have progressive queries or implementing a caching system to limit database calls.
 
-If I had more time and resources, I would add a feature to purchase tickets directly from the site, as well as an integration with Google Maps to better display match locations and provide directions to reach them (currently, I only provide coordinates).
+If I had more time and resources I would:
+- Implement a complete pipeline for ticket purchasing and cash handling.
+- Integrate Google Maps to display match locations interactively and provide real-time directions, instead of only showing raw coordinates.
+- Develop a system to analyze user behavior and predict customer preferences, identifying the most popular matches and teams to offer personalized recommendations.
 
 The main AI tools I used are Cursor (for code generation, like the css files), ChatGPT and Claude AI (for questions when programming).

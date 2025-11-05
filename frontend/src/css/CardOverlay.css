@@ -81,16 +81,29 @@
     align-items: center;
 }
 
-.soldout {
+.buy-button {
     grid-column: 2 / 3;
     font-size: 20px;
     font-weight: 800;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 12px;
+    cursor: pointer;
+}
+
+.buy-button.buy {
+    background: rgba(255, 255, 255, 0.04);
+    color: white;
+}
+
+.buy-button.soldout {
+    background: rgba(255, 0, 0, 0.04);
     color: var(--danger);
+}
+
+.buy-button.buy:active {
+    transform: translateY(3px);
 }
 
 .total-seats {

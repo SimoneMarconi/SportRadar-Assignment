@@ -63,6 +63,19 @@ def getSingleMatch():
     res = getMatch(conn, id)
     return res
 
+# get informations for a single match
+@app.route("/buy_ticket", methods=["POST"])
+def buyTicket():
+    data = request.json
+    if not data:
+        return jsonify({"message": "missing payload"}), 400
+    id = data.get("match_id")
+    if not id:
+        return jsonify({"message": "missing id"}), 400
+    conn = getDb()
+    incrementTicket(conn, id)
+    return {"message": "ticket bought"}, 200
+
 # add a match to the total
 @app.route("/add_match", methods=["POST"])
 def addMatch():

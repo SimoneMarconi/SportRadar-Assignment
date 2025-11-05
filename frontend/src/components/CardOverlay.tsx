@@ -1,7 +1,8 @@
 import ReactDOM from "react-dom"
 
 import "../css/CardOverlay.css"
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 function CardOverlay(props: OverlayProps) {
 
@@ -34,20 +35,47 @@ function CardOverlay(props: OverlayProps) {
         props.setIsOverlay(false)
     }
 
+    function handleBuy(e: React.MouseEvent) {
+        e.stopPropagation()
+        const buttonText = e.currentTarget.textContent
+        if (buttonText === "SOLD OUT") {
+            return
+        }
+        fetch("http://localhost:5000/buy_ticket", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ match_id: cardInfo.match_id }),
+        }).then(
+            response => {
+                if (!response.ok) {
+                    toast.error("Couldn't buy ticket")
+                    return
+                }
+                setCardInfo(prev => ({
+                    ...prev,
+                    tickets_sold: prev.tickets_sold + 1
+                }))
+            }
+        )
+
+    }
+
     const overlay = !loading ? (
         <div className="overlay" onClick={overlayClick} style={{ display: props.isOverlay ? "" : "none" }}>
             <div className="overlay-container">
                 <div className="game-description">
                     <p>Description: </p>
-                    {cardInfo.match_description === null ? "No description for this match" : cardInfo.match_description}
+                    {cardInfo.match_description === null || cardInfo.match_description === "" ? "No description for this match" : cardInfo.match_description}
                 </div>
                 <div className="team1-description">
                     <p>{cardInfo.team1}:</p>
-                    {cardInfo.team1_description === null ? "No description for this match" : cardInfo.team1_description}
+                    {cardInfo.team1_description === null ? "No description for this team" : cardInfo.team1_description}
                 </div>
                 <div className="team2-description">
                     <p>{cardInfo.team2}:</p>
-                    {cardInfo.team2_description === null ? "No description for this match" : cardInfo.team2_description}
+                    {cardInfo.team2_description === null ? "No description for this team" : cardInfo.team2_description}
                 </div>
                 <div className="location-description">
                     <p>Coordinates for the location:</p>
@@ -58,9 +86,9 @@ function CardOverlay(props: OverlayProps) {
                         <p>Tickets Sold:</p>
                         {cardInfo.tickets_sold}
                     </span>
-                    <span className="soldout" style={{ display: cardInfo.total_seats > cardInfo.tickets_sold ? "none" : "flex" }}>
-                        SOLD OUT
-                    </span>
+                    <button className={`buy-button ${cardInfo.total_seats > cardInfo.tickets_sold ? "buy" : "soldout"}`} onClick={handleBuy}>
+                        {cardInfo.total_seats > cardInfo.tickets_sold ? "BUY" : "SOLD OUT"}
+                    </button>
                     <span className="total-seats">
                         <p>Total Seats:</p>
                         {cardInfo.total_seats}

@@ -25,6 +25,7 @@ type OverlayProps = {
 };
 
 type MatchInfo = {
+  match_id: number;
   match_description: string;
   team1: string;
   team2: string;
