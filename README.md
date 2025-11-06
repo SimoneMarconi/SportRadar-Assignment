@@ -1,4 +1,4 @@
-# Sportradar Assignment
+# Sportradar Backend Assignment
 
 ## Overview
 This project implements a full-stack web application using different technologies for the frontend and backend, containerized with Docker for a consistent and reliable deployment environment.
@@ -11,10 +11,16 @@ It handles data management, validation, and API communication with the frontend.
 The frontend is built with **TypeScript** and **React**, providing a responsive and interactive user interface.  
 This setup ensures fast rendering and a smooth user experience.
 
+## Extra additions
+- **Leaderboard** to keep track of state of wins and loss among teams.
+- Simple **caching** in the backend to minimize database queries.
+- Frontend implemented in **React**.
+- Testing environment with **Pytest**.
+
 ## Assumptions
-- Leaderboard Points System: Each team receives 1 point for a win or a draw, and 0 points for a loss. This point system applies equally to all sports within the application.
-- Match Creation Requirements: When inserting a new match, the provided team names and location must already exist in the database, the match must be played in a future time and the teams must play the same sport.
-- Database Dimension: The database is assumed to be relatively small. If it were larger (for example, containing thousands of entries) the issue could be addressed by limiting the number of elements retrieved per query and implementing pagination on the frontend, displaying the data across multiple pages according to the total number of entries in the database.
+- **Leaderboard Points System**: Each team receives 1 point for a win or a draw, and 0 points for a loss. This point system applies equally to all sports within the application.
+- **Match Creation Requirements**: When inserting a new match, the provided team names and location must already exist in the database, the match must be played in a future time and the teams must play the same sport.
+- **Database Dimension**: The database is assumed to be relatively small. If it were larger (for example, containing thousands of entries) the issue could be addressed by limiting the number of elements retrieved per query and implementing pagination on the frontend, displaying the data across multiple pages according to the total number of entries in the database.
 
 ## Getting Started
 
@@ -131,4 +137,3 @@ http://localhost:5173
 The following diagram represents the database schema and entity relationships used in the backend:
 
 ![Diagram](SportRadar.drawio.svg)
-
