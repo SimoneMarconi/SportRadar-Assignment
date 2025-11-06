@@ -86,7 +86,7 @@ function CardOverlay(props: OverlayProps) {
                         <p>Tickets Sold:</p>
                         {cardInfo.tickets_sold}
                     </span>
-                    <button className={`buy-button ${cardInfo.total_seats > cardInfo.tickets_sold ? "buy" : "soldout"}`} onClick={handleBuy}>
+                    <button className={`buy-button ${cardInfo.total_seats > cardInfo.tickets_sold ? "buy" : "soldout"}`} style={{display: new Date(props.date) < new Date() ? "none" : "flex"}} onClick={handleBuy}>
                         {cardInfo.total_seats > cardInfo.tickets_sold ? "BUY" : "SOLD OUT"}
                     </button>
                     <span className="total-seats">

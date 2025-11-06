@@ -41,6 +41,7 @@ function SportCard(props: SportCardProps) {
                     setIsOverlay={setActiveOverlay}
                     isOverlay={activeOverlay}
                     match_id={props.match_id}
+                    date={props.date}
                 />
             }
         </div>

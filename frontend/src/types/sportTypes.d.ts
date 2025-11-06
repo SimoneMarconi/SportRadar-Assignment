@@ -22,6 +22,7 @@ type OverlayProps = {
   match_id: number;
   isOverlay: boolean;
   setIsOverlay: React.Dispatch<React.SetStateAction<boolean>>;
+  date: string;
 };
 
 type MatchInfo = {

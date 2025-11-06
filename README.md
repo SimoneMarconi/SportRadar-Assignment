@@ -14,7 +14,7 @@ This setup ensures fast rendering and a smooth user experience.
 ## Extra additions
 - **Leaderboard** to keep track of state of wins and loss among teams.
 - Simple **caching** in the backend to minimize database queries.
-- Frontend implemented in **React**.
+- Ticket purchasing simulation
 - Testing environment with **Pytest**.
 
 ## Assumptions
